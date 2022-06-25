@@ -2,5 +2,23 @@
 {% block body %}
 
 
+{% for garden in gardens %}
+<p>
+    Garden ID: {{ garden.id }}
+    Address: {{ garden.address }}
+</p>
+<form action="{{ url_for('delete', id=garden.id) }}">
+    <button type="Submit">
+        Delete Garden
+    </button>
+</form>
+<form action="{{ url_for('update', id=garden.id) }}">
+    <button type="Submit">
+        Update Address
+    </button>
+</form>
 
+
+
+{% endfor %}
 {% endblock body %}
