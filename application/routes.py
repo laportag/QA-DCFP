@@ -18,7 +18,7 @@ def plants():
     return render_template("plants.html", plants=plant)
 
 @app.route('/garden_add', methods=['GET','POST'])
-def add():
+def garden_add():
     form = GardenForm()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -31,7 +31,7 @@ def add():
     return render_template('addgarden.html', form=form)
 
 @app.route('/plant_add', methods=['GET','POST'])
-def add():
+def plant_add():
     form = PlantForm()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -44,3 +44,44 @@ def add():
             return redirect(url_for('plants'))
     return render_template('addplant.html', form=form)
 
+@app.route('/delete_garden/<int:id>')
+def delete_garden(id):
+    garden = Gardens.query.get(id)
+    # delete pla_gar entries first
+    db.session.delete(garden)
+    db.session.commit()
+    return redirect(url_for('gardens'))
+
+@app.route('/delete_plant/<int:id>')
+def delete_plant(id):
+    plant = Plant.query.get(id)
+    # delete pla_gar entries first
+    db.session.delete(plant)
+    db.session.commit()
+    return redirect(url_for('plants'))
+
+@app.route('/update_garden/<int:id>', methods=['GET','POST'])
+def update_garden(id):
+    garden = Gardens.query.get(id)
+    form = GardenForm()
+    if form.validate_on_submit():
+        garden.address = form.address.data
+        db.session.commit()
+        return redirect(url_for('gardens'))
+    elif request.method == 'GET':
+        form.address.data = garden.address
+    return render_template('update_garden.html', form=form)
+
+@app.route('/update_plant/<int:id>', methods= ['GET', 'POST'])
+def update_plant(id):
+    plant = Plants.query.get(id)
+    form = PlantForm()
+    if form.validate_on_submit():
+        plant.com_name = form.com_name.data
+        plant.sci_name = form.sci_name.data
+        db.session.commit()
+        return redirect(url_for('plants'))
+    elif request.method == 'GET':
+        form.com_name.data = plant.com_name
+        form.sci_name.data = plant.sci_name
+    return render_template('update_plant.html', form=form)

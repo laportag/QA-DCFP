@@ -5,19 +5,28 @@
 {% for plant in plants %}
 <p>
     Plant ID: {{ plant.id }}
+    <br>
     Common Name: {{ plant.com_name }}
+    <br>
     Scientific Name: {{ plant.sci_name }}
 </p>
-<form action="{{ url_for('delete', id=plant.id) }}">
+<form action="{{ url_for('delete_plant', id=plant.id) }}">
     <button type="Submit">
         Delete Plant
     </button>
 </form>
-<form action="{{ url_for('update', id=plant.id) }}">
+<form action="{{ url_for('update_plant', id=plant.id) }}">
     <button type="Submit">
         Update Plant
     </button>
 </form>
 
 {% endfor %}
+<br>
+<form action="{{ url_for('plant_add') }}">
+    <button type="Submit">
+        Add Plant
+    </button>
+</form>
+
 {% endblock body %}
