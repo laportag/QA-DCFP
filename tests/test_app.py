@@ -49,11 +49,7 @@ class TestAdds(TestBase):
             url_for('garden_add'),
             data = dict(address="testing address")
         )
-        test = Gardens(
-            id = 2,
-            address = "testing address"
-            )
-        self.assertEqual(Gardens.query.filter_by(id=2).first, test)
+        self.assertEqual(Gardens.query.filter_by(id=2).address, "testing address")
 
 
 class TestDelete(TestBase):
