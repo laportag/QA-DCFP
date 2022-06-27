@@ -64,24 +64,26 @@ def delete_plant(id):
 def update_garden(id):
     garden = Gardens.query.get(id)
     form = GardenForm()
-    if form.validate_on_submit():
-        garden.address = form.address.data
-        db.session.commit()
-        return redirect(url_for('gardens'))
+    if request.method == "POST":
+        if form.validate_on_submit():
+            garden.address = form.address.data
+            db.session.commit()
+            return redirect(url_for('gardens'))
     elif request.method == 'GET':
         form.address.data = garden.address
-        return render_template('update_garden.html', form=form)
+    return render_template('update_garden.html', form=form)
 
 @app.route('/update_plant/<int:id>', methods= ['GET', 'POST'])
 def update_plant(id):
     plant = Plants.query.get(id)
     form = PlantForm()
-    if form.validate_on_submit():
-        plant.com_name = form.com_name.data
-        plant.sci_name = form.sci_name.data
-        db.session.commit()
-        return redirect(url_for('plants'))
+    if request.method == "POST":
+        if form.validate_on_submit():
+            plant.com_name = form.com_name.data
+            plant.sci_name = form.sci_name.data
+            db.session.commit()
+            return redirect(url_for('plants'))
     elif request.method == 'GET':
         form.com_name.data = plant.com_name
         form.sci_name.data = plant.sci_name
-        return render_template('update_plant.html', form=form)
+    return render_template('update_plant.html', form=form)
