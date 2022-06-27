@@ -17,11 +17,6 @@ def plants():
     plant = Plants.query.all()
     return render_template("plants.html", plants=plant)
 
-@app.route('/plants/<int:id>')
-def plant(id):
-    plant = Plants.query.get(id)
-    return render_template("plants.html", plants=plant)
-
 @app.route('/garden_add', methods=['GET','POST'])
 def garden_add():
     form = GardenForm()
