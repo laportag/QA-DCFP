@@ -64,13 +64,13 @@ class TestAdds(TestBase):
 
 class TestDelete(TestBase):
     def test_delete_garden(self):
-        response = self.client.delete(
+        response = self.client.get(
             url_for('delete_garden', id=1)
         )
         self.assertEqual(0, len(Gardens.query.all()))
 
     def test_delete_plant(self):
-        response = self.client.delete(
+        response = self.client.get(
             url_for('delete_plant', id=1)
         )
         self.assertEqual(0, len(Plants.query.all()))

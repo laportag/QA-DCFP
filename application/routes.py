@@ -70,7 +70,7 @@ def update_garden(id):
         return redirect(url_for('gardens'))
     elif request.method == 'GET':
         form.address.data = garden.address
-    return render_template('update_garden.html', form=form)
+        return render_template('update_garden.html', form=form)
 
 @app.route('/update_plant/<int:id>', methods= ['GET', 'POST'])
 def update_plant(id):
@@ -84,4 +84,4 @@ def update_plant(id):
     elif request.method == 'GET':
         form.com_name.data = plant.com_name
         form.sci_name.data = plant.sci_name
-    return render_template('update_plant.html', form=form)
+        return render_template('update_plant.html', form=form)
