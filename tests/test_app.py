@@ -62,11 +62,34 @@ class TestAdds(TestBase):
         self.assertEqual(Plants.query.filter_by(id=2).first().com_name, "test name")
 
 
-# class TestDelete(TestBase):
-#     def test_delete_garden(self):
-#         response = self.client.delete(
-#             url_for('delete_garden'),
-#             data = dict(address="Test Address")
-#         )
-#         self.assertEqual(0, len(Gardens.query.all()))
+class TestDelete(TestBase):
+    def test_delete_garden(self):
+        response = self.client.delete(
+            url_for('delete_garden', id=1)
+        )
+        self.assertEqual(0, len(Gardens.query.all()))
 
+    def test_delete_plant(self):
+        response = self.client.delete(
+            url_for('delete_plant', id=1)
+        )
+        self.assertEqual(0, len(Plants.query.all()))
+
+
+class TestUpdate(TestBase):
+    def test_update_garden(self):
+        response = self.client.post(
+            url_for('update_garden', id=1),
+            data = dict(address="testing address")
+        )
+        self.assertEqual(Gardens.query.filter_by(id=1).first().address, "testing address")
+    
+    def test_update_plant(self):
+        response = self.client.post(
+            url_for('update_plant', id=1),
+            data = dict(
+                com_name="test name",
+                sci_name="test sci name"
+                )
+        )
+        self.assertEqual(Plants.query.filter_by(id=1).first().com_name, "test name")
