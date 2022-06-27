@@ -17,6 +17,11 @@ def plants():
     plant = Plants.query.all()
     return render_template("plants.html", plants=plant)
 
+@app.route('/plants/<int:id>')
+def plant(id):
+    plant = Plants.query.get(id)
+    return render_template("plants.html", plants=plant)
+
 @app.route('/garden_add', methods=['GET','POST'])
 def garden_add():
     form = GardenForm()
@@ -54,7 +59,7 @@ def delete_garden(id):
 
 @app.route('/delete_plant/<int:id>')
 def delete_plant(id):
-    plant = Plant.query.get(id)
+    plant = Plants.query.get(id)
     # delete pla_gar entries first
     db.session.delete(plant)
     db.session.commit()
