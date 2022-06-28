@@ -13,11 +13,19 @@
     {% for entry in pla_gar %}
         {% if entry.garden_id == garden.id %}
             <p>
-            {{ entry.plant_id }} 
+            {{ entry.plant_id }}
+            
+            {% if entry.plant_id == plant.id %}
+                <p>
+                {{ plant.com_name }}
+                <br>
+                {{ plant.sci_name }}
+                </p>
+            {% endif %}
             </p>
             <form action="{{ url_for('remove_from_garden', id=entry.id) }}">
                 <button type="Submit">
-                    Remove from Garden
+                    Remove Plant from Garden
                 </button>
             </form>
         {% endif %}

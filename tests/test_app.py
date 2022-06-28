@@ -2,7 +2,7 @@ from flask import url_for
 from flask_testing import TestCase
 
 from application import app, db
-from application.models import Plants, Gardens
+from application.models import Plants, Gardens, Pla_Gar
 
 class TestBase(TestCase):
     def create_app(self):
@@ -22,8 +22,13 @@ class TestBase(TestCase):
             com_name = "Test com_name",
             sci_name = "test sci_name"
         )
+        testPlaGar = Pla_Gar(
+            plant_id = "1",
+            garden_id = "1"
+        )
         db.session.add(testGarden)
         db.session.add(testPlant)
+        db.session.add(testPlaGar)
         db.session.commit()
 
     def tearDown(self):
@@ -51,6 +56,12 @@ class TestViews(TestBase):
         response = self.client.get(url_for("garden_add"))
         self.assertEqual(response.status_code, 200)
 
+    def test_garden_add(self):
+        response = self.client.get(url_for("combined"))
+        self.assertEqual(response.status_code, 200)
+
+    
+
 class TestAdds(TestBase):
     def test_garden_add(self):
         response = self.client.post(
@@ -69,6 +80,15 @@ class TestAdds(TestBase):
         )
         self.assertEqual(Plants.query.filter_by(id=2).first().com_name, "test name")
 
+    def test_pla_gar_add(self):
+        response = self.client.post(
+            url_for('add_to_garden'),
+            data = dict(
+                plant_id="1",
+                sci_name="1"
+                )
+        )
+        self.assertEqual(Pla_Gar.query.filter_by(id=2).first().plant_id, "1")
 
 class TestDelete(TestBase):
     def test_delete_garden(self):
