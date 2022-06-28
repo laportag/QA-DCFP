@@ -1,6 +1,6 @@
 from application import app, db
-from application.models import Plants, Gardens
-from application.forms import PlantForm, GardenForm
+from application.models import Plants, Gardens, Pla_Gar
+from application.forms import PlantForm, GardenForm, AddressForm
 from flask import redirect, url_for, render_template, request
 
 @app.route('/')
@@ -10,12 +10,18 @@ def index():
 @app.route('/gardens')
 def gardens():
     garden = Gardens.query.all()
+    pla_gar = Pla_Gar.query.all()
     return render_template("gardens.html", gardens=garden)
 
 @app.route('/plants')
 def plants():
     plant = Plants.query.all()
     return render_template("plants.html", plants=plant)
+
+@app.route('/combined')
+def combined():
+    pla_gar = Pla_Gar.query.all()
+    return render_template("combined.html", pla_gar=pla_gar)
 
 @app.route('/garden_add', methods=['GET','POST'])
 def garden_add():
@@ -87,3 +93,19 @@ def update_plant(id):
         form.com_name.data = plant.com_name
         form.sci_name.data = plant.sci_name
     return render_template('update_plant.html', form=form)
+
+@app.route('/add_to_garden/<int:id>', methods = ['GET', 'POST'])
+def add_to_garden(id):
+    plant_id = Plants.query.get(id)
+    form = AddressForm()
+    gardens = Gardens.query.all()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            pla_gar = Pla_Gar(
+                plant_id = plant_id.id,
+                garden_id = form.address.data
+            )
+            db.session.add(pla_gar)
+            db.session.commit()  
+            return redirect(url_for('combined'))
+    return render_template('add_to_garden.html', form=form)

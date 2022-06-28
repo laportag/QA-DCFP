@@ -20,6 +20,11 @@
         Update Plant
     </button>
 </form>
+<form action="{{ url_for('add_to_garden', id=plant.id) }}">
+    <button type="Submit">
+        Add to Garden
+    </button>
+</form>
 
 {% endfor %}
 <br>

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% for pla_gar in pla_gars %}
+<p>
+    Garden: {{ pla_gar.garden_id }}
+    <br>
+    Plant: {{ pla_gar.plant_id }}
+</p>
+
+
+{% endfor %}
+
+{% endblock body %}
