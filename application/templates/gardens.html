@@ -8,12 +8,22 @@
     <br>
     Address: {{ garden.address }}
     <br>
-    {% for pla_gar in pla_gars %}
-
-        <p> Plants: {{ pla_gar.plant_id }} </p>
-        
+    Plant IDs:
+   
+    {% for entry in pla_gar %}
+        {% if entry.garden_id == garden.id %}
+            <p>
+            {{ entry.plant_id }} 
+            </p>
+            <form action="{{ url_for('remove_from_garden', id=entry.id) }}">
+                <button type="Submit">
+                    Remove from Garden
+                </button>
+            </form>
+        {% endif %}
     {% endfor %}
 </p>
+
 <form action="{{ url_for('delete_garden', id=garden.id) }}">
     <button type="Submit">
         Delete Garden
@@ -24,8 +34,9 @@
         Update Address
     </button>
 </form>
-
+<br>
 {% endfor %}
+
 <br>
 <form action="{{ url_for('garden_add') }}">
     <button type="Submit">

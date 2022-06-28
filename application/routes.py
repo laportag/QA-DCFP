@@ -11,7 +11,8 @@ def index():
 def gardens():
     garden = Gardens.query.all()
     pla_gar = Pla_Gar.query.all()
-    return render_template("gardens.html", gardens=garden)
+    plant = Plants.query.all()
+    return render_template("gardens.html", gardens=garden, pla_gar=pla_gar, plant=plant)
 
 @app.route('/plants')
 def plants():
@@ -21,7 +22,8 @@ def plants():
 @app.route('/combined')
 def combined():
     pla_gar = Pla_Gar.query.all()
-    return render_template("combined.html", pla_gar=pla_gar)
+    gardens = Gardens.query.all()
+    return render_template("combined.html", pla_gar=pla_gar, gardens=gardens)
 
 @app.route('/garden_add', methods=['GET','POST'])
 def garden_add():
@@ -102,10 +104,18 @@ def add_to_garden(id):
     if request.method == 'POST':
         if form.validate_on_submit():
             pla_gar = Pla_Gar(
-                plant_id = form.plant_id.data,
+                plant_id = plant_id.id,
                 garden_id = form.address.data
             )
             db.session.add(pla_gar)
             db.session.commit()  
             return redirect(url_for('combined'))
     return render_template('add_to_garden.html', form=form)
+
+@app.route('/remove_from_garden/<int:id>')
+def remove_from_garden(id):
+    entry = Pla_Gar.query.get(id)
+    db.session.delete(entry)
+    db.session.commit()
+    return redirect(url_for('gardens'))
+
