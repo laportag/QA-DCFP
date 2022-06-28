@@ -7,6 +7,12 @@
     Garden ID: {{ garden.id }}
     <br>
     Address: {{ garden.address }}
+    <br>
+    {% for pla_gar in pla_gars %}
+
+        <p> Plants: {{ pla_gar.plant_id }} </p>
+        
+    {% endfor %}
 </p>
 <form action="{{ url_for('delete_garden', id=garden.id) }}">
     <button type="Submit">
