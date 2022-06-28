@@ -13,5 +13,5 @@ class Gardens(db.Model):
 
 class Pla_Gar(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    plant_id = db.Column(db.Integer, db.ForeignKey('plants.id'), nullable=False)
-    garden_id = db.Column(db.Integer, db.ForeignKey('gardens.id'), nullable=False)
+    plant_id = db.Column('plant_id', db.Integer, db.ForeignKey('plants.id'), nullable=False)
+    garden_id = db.Column('garden_id', db.Integer, db.ForeignKey('gardens.id'), nullable=False)

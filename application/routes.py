@@ -102,7 +102,7 @@ def add_to_garden(id):
     if request.method == 'POST':
         if form.validate_on_submit():
             pla_gar = Pla_Gar(
-                plant_id = plant_id.id,
+                plant_id = form.plant_id.data,
                 garden_id = form.address.data
             )
             db.session.add(pla_gar)
