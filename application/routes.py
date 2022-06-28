@@ -1,6 +1,6 @@
 from application import app, db
-from application.models import Plants, Gardens
-from application.forms import PlantForm, GardenForm
+from application.models import Plants, Gardens, Pla_Gar
+from application.forms import PlantForm, GardenForm, AddressForm
 from flask import redirect, url_for, render_template, request
 
 @app.route('/')
@@ -10,12 +10,21 @@ def index():
 @app.route('/gardens')
 def gardens():
     garden = Gardens.query.all()
-    return render_template("gardens.html", gardens=garden)
+    pla_gar = Pla_Gar.query.all()
+    plant = Plants.query.all()
+    return render_template("gardens.html", gardens=garden, pla_gar=pla_gar, plant=plant)
 
 @app.route('/plants')
 def plants():
     plant = Plants.query.all()
     return render_template("plants.html", plants=plant)
+
+@app.route('/combined')
+def combined():
+    pla_gar = Pla_Gar.query.all()
+    gardens = Gardens.query.all()
+    plant = Plants.query.all()
+    return render_template("combined.html", pla_gar=pla_gar, gardens=gardens, plant=plant)
 
 @app.route('/garden_add', methods=['GET','POST'])
 def garden_add():
@@ -47,7 +56,10 @@ def plant_add():
 @app.route('/delete_garden/<int:id>')
 def delete_garden(id):
     garden = Gardens.query.get(id)
-    # delete pla_gar entries first
+    pla_gar = Pla_Gar.query.filter_by(garden_id=garden.id).all()
+    for entry in pla_gar:
+        db.session.delete(entry)
+        db.session.commit()
     db.session.delete(garden)
     db.session.commit()
     return redirect(url_for('gardens'))
@@ -55,7 +67,10 @@ def delete_garden(id):
 @app.route('/delete_plant/<int:id>')
 def delete_plant(id):
     plant = Plants.query.get(id)
-    # delete pla_gar entries first
+    pla_gar = Pla_Gar.query.filter_by(plant_id=plant.id).all()
+    for entry in pla_gar:
+        db.session.delete(entry)
+        db.session.commit()
     db.session.delete(plant)
     db.session.commit()
     return redirect(url_for('plants'))
@@ -87,3 +102,26 @@ def update_plant(id):
         form.com_name.data = plant.com_name
         form.sci_name.data = plant.sci_name
     return render_template('update_plant.html', form=form)
+
+@app.route('/add_to_garden/<int:id>', methods = ['GET', 'POST'])
+def add_to_garden(id):
+    plant_id = Plants.query.get(id).id
+    form = AddressForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            pla_gar = Pla_Gar(
+                plant_id = plant_id,
+                garden_id = form.address.data
+            )
+            db.session.add(pla_gar)
+            db.session.commit()  
+            return redirect(url_for('combined'))
+    return render_template('add_to_garden.html', form=form)
+
+@app.route('/remove_from_garden/<int:id>')
+def remove_from_garden(id):
+    entry = Pla_Gar.query.get(id)
+    db.session.delete(entry)
+    db.session.commit()
+    return redirect(url_for('gardens'))
+
