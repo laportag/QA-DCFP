@@ -55,7 +55,10 @@ def plant_add():
 @app.route('/delete_garden/<int:id>')
 def delete_garden(id):
     garden = Gardens.query.get(id)
-    # delete pla_gar entries first
+    pla_gar = Pla_Gar.query.filter_by(garden_id=garden.id).all()
+    for entry in pla_gar:
+        db.session.delete(entry)
+        db.session.commit()
     db.session.delete(garden)
     db.session.commit()
     return redirect(url_for('gardens'))
@@ -63,7 +66,10 @@ def delete_garden(id):
 @app.route('/delete_plant/<int:id>')
 def delete_plant(id):
     plant = Plants.query.get(id)
-    # delete pla_gar entries first
+    pla_gar = Pla_Gar.query.filter_by(plant_id=plant.id).all()
+    for entry in pla_gar:
+        db.session.delete(entry)
+        db.session.commit()
     db.session.delete(plant)
     db.session.commit()
     return redirect(url_for('plants'))

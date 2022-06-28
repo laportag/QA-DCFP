@@ -82,7 +82,7 @@ class TestAdds(TestBase):
 
     def test_pla_gar_add(self):
         response = self.client.post(
-            url_for('add_to_garden'),
+            url_for('add_to_garden', id=1),
             data = dict(
                 plant_id="1",
                 sci_name="1"
@@ -102,6 +102,12 @@ class TestDelete(TestBase):
             url_for('delete_plant', id=1)
         )
         self.assertEqual(0, len(Plants.query.all()))
+
+    def test_remove_from_garden(self):
+        response = self.client.get(
+            url_for('remove_from_garden', id=1)
+        )
+        self.assertEqual(0, len(Pla_Gar.query.all()))
 
 
 class TestUpdate(TestBase):
