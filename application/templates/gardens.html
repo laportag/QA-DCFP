@@ -8,21 +8,25 @@
     <br>
     Address: {{ garden.address }}
     <br>
-    Plant IDs:
-   
+    Plants:
+    <br>
+    <br>
     {% for entry in pla_gar %}
         {% if entry.garden_id == garden.id %}
-            <p>
-            {{ entry.plant_id }}
             
-            {% if entry.plant_id == plant.id %}
-                <p>
-                {{ plant.com_name }}
-                <br>
-                {{ plant.sci_name }}
-                </p>
-            {% endif %}
-            </p>
+            ID: {{ entry.plant_id }}
+            {% for plant in plant %}
+                {% if entry.plant_id == plant.id %}
+                    <br>
+                    Common name: {{ plant.com_name }}
+                    <br>
+                    Scientific name: {{ plant.sci_name }}
+                    <br>
+                    <br>
+                    
+                {% endif %}
+            {% endfor %}
+            
             <form action="{{ url_for('remove_from_garden', id=entry.id) }}">
                 <button type="Submit">
                     Remove Plant from Garden

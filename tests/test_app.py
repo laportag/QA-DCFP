@@ -59,8 +59,7 @@ class TestViews(TestBase):
     def test_garden_add(self):
         response = self.client.get(url_for("combined"))
         self.assertEqual(response.status_code, 200)
-
-    
+ 
 
 class TestAdds(TestBase):
     def test_garden_add(self):
@@ -82,10 +81,10 @@ class TestAdds(TestBase):
 
     def test_pla_gar_add(self):
         response = self.client.post(
-            url_for('add_to_garden', id=1),
+            url_for('add_to_garden', id="1"),
             data = dict(
                 plant_id="1",
-                sci_name="1"
+                garden_id="1"
                 )
         )
         self.assertEqual(Pla_Gar.query.filter_by(id=2).first().plant_id, "1")

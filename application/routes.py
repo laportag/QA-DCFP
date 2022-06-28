@@ -106,7 +106,6 @@ def update_plant(id):
 def add_to_garden(id):
     plant_id = Plants.query.get(id)
     form = AddressForm()
-    gardens = Gardens.query.all()
     if request.method == 'POST':
         if form.validate_on_submit():
             pla_gar = Pla_Gar(
