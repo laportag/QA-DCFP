@@ -11,6 +11,5 @@ class GardenForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class AddressForm(FlaskForm):
-    # plant_id = IntegerField("Plant ID")
     address = IntegerField("Please enter Garden ID")
     submit = SubmitField("Submit")

@@ -23,7 +23,8 @@ def plants():
 def combined():
     pla_gar = Pla_Gar.query.all()
     gardens = Gardens.query.all()
-    return render_template("combined.html", pla_gar=pla_gar, gardens=gardens)
+    plant = Plants.query.all()
+    return render_template("combined.html", pla_gar=pla_gar, gardens=gardens, plant=plant)
 
 @app.route('/garden_add', methods=['GET','POST'])
 def garden_add():
@@ -104,12 +105,12 @@ def update_plant(id):
 
 @app.route('/add_to_garden/<int:id>', methods = ['GET', 'POST'])
 def add_to_garden(id):
-    plant_id = Plants.query.get(id)
+    plant_id = Plants.query.get(id).id
     form = AddressForm()
     if request.method == 'POST':
         if form.validate_on_submit():
             pla_gar = Pla_Gar(
-                plant_id = plant_id.id,
+                plant_id = plant_id,
                 garden_id = form.address.data
             )
             db.session.add(pla_gar)

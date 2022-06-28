@@ -51,10 +51,6 @@ class TestViews(TestBase):
     def test_plant_add(self):       
         response = self.client.get(url_for("plant_add"))
         self.assertEqual(response.status_code, 200)
-        
-    def test_garden_add(self):
-        response = self.client.get(url_for("garden_add"))
-        self.assertEqual(response.status_code, 200)
 
     def test_garden_add(self):
         response = self.client.get(url_for("combined"))
@@ -79,15 +75,15 @@ class TestAdds(TestBase):
         )
         self.assertEqual(Plants.query.filter_by(id=2).first().com_name, "test name")
 
-    def test_pla_gar_add(self):
+    def test_add_to_garden(self):
         response = self.client.post(
-            url_for('add_to_garden', id="1"),
+            url_for('add_to_garden', id=1),
             data = dict(
-                plant_id="1",
-                garden_id="1"
+                address=1
                 )
         )
-        self.assertEqual(Pla_Gar.query.filter_by(id=2).first().plant_id, "1")
+        self.assertEqual(Pla_Gar.query.filter_by(id=2).first().plant_id, 1)
+
 
 class TestDelete(TestBase):
     def test_delete_garden(self):
