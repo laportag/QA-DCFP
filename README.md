@@ -30,26 +30,26 @@ Software:
     sudo apt update \
     sudo apt install python3 \
     sudo apt install python3-venv  \
-    sudo apt install python3-pip \
+    sudo apt install python3-pip 
 
 -Run these commands to install and run the virtual environment: \
     python3 -m venv venv \
-    source venv/bin/activate \
+    source venv/bin/activate 
 
 -Run these commands to install required packages to the virtual environment: \
     pip3 install -r requirements.txt \
-    pip install gunicorn \
+    pip install gunicorn 
 
 -Run these commands to set your environmental variables: \
     export DATABASE_URI=mysql+pymysql://root:root@[your_database_ip]:3306/[your_database_name] \
         (if running database as a local instance, use "sqlite:///data.db" as the DATABASE_URI) \
-    export SECRET_KEY=[your_secret_key] \
+    export SECRET_KEY=[your_secret_key] 
 
 -Run this command to start the application: \
-    gunicorn --workers=4 --bind=0.0.0.0:5000 app:app \
+    gunicorn --workers=4 --bind=0.0.0.0:5000 app:app 
 
 -Open the webapp by entering the ip of the machine into a browser with the port 5000:  \
-    [your_ip_address:5000] \
+    [your_ip_address:5000] 
 
 
 ## Running the tests
@@ -59,14 +59,14 @@ Move into the QA-DCFP folder and run: \
 
 ### Unit Tests 
 
-The Unit tests test the functions in the routes.py file. There is 99% coverage testing the entire app and 98% of the routes.py file.
+The Unit tests test the functions in the routes.py file. There is 99% coverage testing the entire app and 98% of the routes.py file. Pytest was used for the unit tests.
 
 
 ## Built With
 
--Flask
--Python
--Jenkins
+-Flask \
+-Python \
+-Jenkins 
 
 ## Versioning
 
@@ -82,4 +82,4 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Acknowledgments
 
-* Thanks to the QA training team for providing the requisite knowlegde to build this app.
+* Thanks to the QA training team for imparting the requisite knowlegde to build this app.
