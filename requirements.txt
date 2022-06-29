@@ -6,3 +6,6 @@ wtforms
 pytest
 pytest-cov
 flask_testing
+gunicorn
+nginx
+curl
