@@ -1,2 +1,85 @@
-# QA-DCFP
-DevOps Core Fundamental Project
+## QA-DCFP
+# DevOps Core Fundamental Project
+
+
+This is a simple web application that an end user can interact with via their browser in order to to manage a cloud-hosted database of gardens and plants. It allows the user to create, read, update and delete entries for both of these categories as well as adding and removing plants from individual gardens.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+Software:
+
+-Linux system (Ubuntu 18.04 or similar)
+    https://releases.ubuntu.com/18.04/
+
+-MySQL installed either locally or on a cloud hosting service
+
+
+
+### Installing
+
+
+-Clone the repository to the machine you wish to run it on:
+    git clone https://github.com/laportag/QA-DCFP.git
+
+-Move into the QA-DCFP directory and run these commands to install python, python pip package installer and the python virtual environment venv:
+    cd QA-DCFP/
+    sudo apt update
+    sudo apt install python3
+    sudo apt install python3-venv 
+    sudo apt install python3-pip
+
+-Run these commands to install and run the virtual environment:
+    python3 -m venv venv
+    source venv/bin/activate
+
+-Run these commands to install required packages to the virtual environment:
+    pip3 install -r requirements.txt
+    pip install gunicorn
+
+-Run these commands to set your environmental variables:
+    export DATABASE_URI=mysql+pymysql://root:root@[your_database_ip]:3306/[your_database_name]
+        (if running database as a local instance, use "sqlite:///data.db" as the DATABASE_URI)
+    export SECRET_KEY=[your_secret_key]
+
+-Run this command to start the application:
+    gunicorn --workers=4 --bind=0.0.0.0:5000 app:app
+
+-Open the webapp by entering the ip of the machine into a browser with the port 5000:
+    [your_ip_address:5000]
+
+
+## Running the tests
+
+Move into the QA-DCFP folder and run:
+    python3 -m pytest --cov --cov-report term-missing
+
+### Unit Tests 
+
+The Unit tests test the functions in the routes.py file. There is 99% coverage testing the entire app and 98% of the routes.py file.
+
+
+## Built With
+
+-Flask
+-Python
+-Jenkins
+
+## Versioning
+
+Git was used for version control.
+
+## Authors
+
+* **Gregory Laporta** 
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details 
+
+## Acknowledgments
+
+* Thanks to the QA training team for providing the requisite knowlegde to build this app.
