@@ -26,11 +26,11 @@ Software:
     git clone https://github.com/laportag/QA-DCFP.git
 
 -Move into the QA-DCFP directory and run these commands to install python, python pip package installer and the python virtual environment venv: \
-    cd QA-DCFP/ \
-    sudo apt update \
-    sudo apt install python3 \
-    sudo apt install python3-venv  \
-    sudo apt install python3-pip 
+    > cd QA-DCFP/ \
+    > sudo apt update \
+    > sudo apt install python3 \
+    > sudo apt install python3-venv  \
+    > sudo apt install python3-pip 
 
 -Run these commands to install and run the virtual environment: \
     python3 -m venv venv \
