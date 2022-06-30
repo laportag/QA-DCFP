@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% for entry in pla_gar %}
+<p>
+    Entry: {{ entry.id }}
+    <br>
+    Garden ID: {{ entry.garden_id }}
+    <br>
+    Plant ID: {{ entry.plant_id }}
+</p>
+
+
+{% endfor %}
+
+{% endblock body %}
