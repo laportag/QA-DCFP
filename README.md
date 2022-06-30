@@ -68,7 +68,7 @@ Software:
 - Change the file permissions of the service file:
     > sudo chmod 777 /etc/systemd/system/crud-garden.service
 
-Start the service:
+Start the service: \
     > sudo systemctl daemon-reload
     > sudo systemctl start crud-garden
 
