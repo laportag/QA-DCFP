@@ -33,18 +33,18 @@ Software:
     > sudo apt install python3-pip 
 
 -Run these commands to install and run the virtual environment: \
-    python3 -m venv venv \
-    source venv/bin/activate 
+    > python3 -m venv venv \
+    > source venv/bin/activate 
 
 -Run these commands to install required packages to the virtual environment: \
-    pip3 install -r requirements.txt \
-    pip install gunicorn 
+    > pip3 install -r requirements.txt \
+    > pip install gunicorn 
 
 -Run the create.py file to initialise the database:
-    python3 create.py
+    > python3 create.py
 
 -Create a user for the systemd service to run the webserver in the background:
-    sudo useradd --system garden
+    > sudo useradd --system garden
 
 -Create a file called crud-garden.service containing the following:
 
@@ -66,11 +66,11 @@ Software:
 - Copy the crud-garden.service to /etc/systemd/system/crud-garden.service
 
 - Change the file permissions of the service file:
-    sudo chmod 777 /etc/systemd/system/crud-garden.service
+    > sudo chmod 777 /etc/systemd/system/crud-garden.service
 
 Start the service:
-    sudo systemctl daemon-reload
-    sudo systemctl start crud-garden
+    > sudo systemctl daemon-reload
+    > sudo systemctl start crud-garden
 
 -Open the webapp by entering the ip of the machine into a browser with the port 5000:  \
     [your_ip_address:5000] 
@@ -79,7 +79,7 @@ Start the service:
 ## Running the tests
 
 Move into the QA-DCFP folder and run: \
-    python3 -m pytest --cov --cov-report term-missing \
+    > python3 -m pytest --cov --cov-report term-missing \
 
 ### Unit Tests 
 
