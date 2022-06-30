@@ -40,10 +40,10 @@ Software:
     > pip3 install -r requirements.txt \
     > pip install gunicorn 
 
--Run the create.py file to initialise the database:
+-Run the create.py file to initialise the database:  
     > python3 create.py
 
--Create a user for the systemd service to run the webserver in the background:
+-Create a user for the systemd service to run the webserver in the background:  
     > sudo useradd --system garden
 
 -Create a file called crud-garden.service containing the following:
