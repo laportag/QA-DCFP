@@ -69,8 +69,8 @@ Software:
     > sudo chmod 777 /etc/systemd/system/crud-garden.service
 
 Start the service: \
-    > sudo systemctl daemon-reload
-    > sudo systemctl start crud-garden
+    > sudo systemctl daemon-reload \
+    > sudo systemctl start crud-garden \
 
 -Open the webapp by entering the ip of the machine into a browser with the port 5000:  \
     [your_ip_address:5000] 
