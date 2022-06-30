@@ -68,7 +68,7 @@ Software:
 - Change the file permissions of the service file:
     > sudo chmod 777 /etc/systemd/system/crud-garden.service
 
-Start the service: \
+### Start the service: \
     > sudo systemctl daemon-reload \
     > sudo systemctl start crud-garden 
 
@@ -96,9 +96,9 @@ The Unit tests test the functions in the routes.py file. There is 99% coverage t
 
 Git was used for version control.
 
-## Authors
+## Author
 
-* **Gregory Laporta** 
+Gregory Laporta  
 
 ## License
 
@@ -106,4 +106,4 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Acknowledgments
 
-* Thanks to the QA training team for imparting the requisite knowlegde to build this app.
+Thanks to the QA training team for imparting the requisite knowlegde to build this app.
