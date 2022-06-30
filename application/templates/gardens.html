@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+{% for garden in gardens %}
+<p>
+    Garden ID: {{ garden.id }}
+    <br>
+    Address: {{ garden.address }}
+    <br>
+    Plants:
+    <br>
+    <br>
+    {% for entry in pla_gar %}
+        {% if entry.garden_id == garden.id %}
+            
+            ID: {{ entry.plant_id }}
+            {% for plant in plant %}
+                {% if entry.plant_id == plant.id %}
+                    <br>
+                    Common name: {{ plant.com_name }}
+                    <br>
+                    Scientific name: {{ plant.sci_name }}
+                    <br>
+                    <br>
+                    
+                {% endif %}
+            {% endfor %}
+            
+            <form action="{{ url_for('remove_from_garden', id=entry.id) }}">
+                <button type="Submit">
+                    Remove Plant from Garden
+                </button>
+            </form>
+        {% endif %}
+    {% endfor %}
+</p>
+
+<form action="{{ url_for('delete_garden', id=garden.id) }}">
+    <button type="Submit">
+        Delete Garden
+    </button>
+</form>
+<form action="{{ url_for('update_garden', id=garden.id) }}">
+    <button type="Submit">
+        Update Address
+    </button>
+</form>
+<br>
+{% endfor %}
+
+<br>
+<form action="{{ url_for('garden_add') }}">
+    <button type="Submit">
+        Add Garden
+    </button>
+</form>
+
+{% endblock body %}
