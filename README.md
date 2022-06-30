@@ -68,8 +68,8 @@ Software:
 - Change the file permissions of the service file:
     > sudo chmod 777 /etc/systemd/system/crud-garden.service
 
-### Start the service: \
-    > sudo systemctl daemon-reload \
+## Start the service:  
+    > sudo systemctl daemon-reload   
     > sudo systemctl start crud-garden 
 
 -Open the webapp by entering the ip of the machine into a browser with the port 5000:  \
@@ -83,7 +83,7 @@ Move into the QA-DCFP folder and run: \
 
 ### Unit Tests 
 
-The Unit tests test the functions in the routes.py file. There is 99% coverage testing the entire app and 98% of the routes.py file. Pytest was used for the unit tests.
+The Unit tests test the functions in the routes.py file. There is 99% coverage testing the entire app and 98% of the routes.py file. Pytest was used for the unit tests. The tests for creating and updating also work as integration testing due to the intrinsic nature of Flask microframework.
 
 
 ## Built With
