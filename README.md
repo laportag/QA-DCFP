@@ -2,7 +2,7 @@
 # DevOps Core Fundamental Project
 
 
-This is a simple web application that an end user can interact with via their browser in order to to manage a cloud-hosted database of gardens and plants. It allows the user to create, read, update and delete entries for both of these categories as well as adding and removing plants from individual gardens.
+This is a simple web application that an end user can interact with via their browser in order to manage a cloud-hosted database of gardens and plants. It allows the user to create, read, update and delete entries for both of these categories as well as adding and removing plants from individual gardens.
 
 ## Getting Started
 
