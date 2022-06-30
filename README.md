@@ -40,13 +40,37 @@ Software:
     pip3 install -r requirements.txt \
     pip install gunicorn 
 
--Run these commands to set your environmental variables: \
-    export DATABASE_URI=mysql+pymysql://root:root@[your_database_ip]:3306/[your_database_name] \
-        (if running database as a local instance, use "sqlite:///data.db" as the DATABASE_URI) \
-    export SECRET_KEY=[your_secret_key] 
+-Run the create.py file to initialise the database:
+    python3 create.py
 
--Run this command to start the application: \
-    gunicorn --workers=4 --bind=0.0.0.0:5000 app:app 
+-Create a user for the systemd service to run the webserver in the background:
+    sudo useradd --system garden
+
+-Create a file called crud-garden.service containing the following:
+
+    [Unit]
+    Description=CRUD-Garden app
+    After=network.target
+
+    [Service]
+    User=garden
+    Type=Simple
+    ExecStart=/[path to your repo]/venv/bin/gunicorn --chdir /[path to your repo] --workers=4 --bind=0.0.0.0:5000 app:app
+    Environment=DATABASE_URI=mysql+pymysql://root:root@[your_database_ip]:3306/[your_database_name]
+    Environment=SECRET_KEY=[your_secret_key]
+    Restart=on-failure
+
+    [Install]
+    WantedBy=multi-user.target
+
+- Copy the crud-garden.service to /etc/systemd/system/crud-garden.service
+
+- Change the file permissions of the service file:
+    sudo chmod 777 /etc/systemd/system/crud-garden.service
+
+Start the service:
+    sudo systemctl daemon-reload
+    sudo systemctl start crud-garden
 
 -Open the webapp by entering the ip of the machine into a browser with the port 5000:  \
     [your_ip_address:5000] 
