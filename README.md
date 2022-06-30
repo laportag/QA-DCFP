@@ -65,7 +65,7 @@ Software:
 
 - Copy the crud-garden.service to /etc/systemd/system/crud-garden.service
 
-- Change the file permissions of the service file:
+- Change the file permissions of the service file:  
     > sudo chmod 777 /etc/systemd/system/crud-garden.service
 
 ## Start the service:  
